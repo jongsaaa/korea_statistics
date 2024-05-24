@@ -1,0 +1,7 @@
+*.zip
+**/gis csv data/**
+**/hospital/**
+**/infra/**
+**/pop/**
+**/road/**
+**/school/**
