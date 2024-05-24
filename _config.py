@@ -17,3 +17,7 @@ infra_write_path = '.\\infra\\write'
 school_read_path = '.\\school\\read'
 school_write_path = '.\\school\\write'
 
+#병원
+hospital_read_path = '.\\hospital\\read'
+hospital_write_path = '.\\hospital\\write'
+
