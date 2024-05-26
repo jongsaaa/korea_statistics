@@ -61,3 +61,7 @@ def execute_sql(sql):
 	conn.close()
 
 	return result
+
+#list type data 분할하기
+def chunker(seq, size):
+	return (seq[pos:pos + size] for pos in range(0, len(seq), size))
