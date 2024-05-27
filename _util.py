@@ -65,3 +65,23 @@ def execute_sql(sql):
 #list type data 분할하기
 def chunker(seq, size):
 	return (seq[pos:pos + size] for pos in range(0, len(seq), size))
+
+# 특정 테이블 컬럼명 꺼내기
+def getTableColumns(table_nm):
+	sql = f'''
+		SELECT column_name as col_nm
+		FROM information_schema.columns
+		WHERE table_schema = 'public' AND table_name = '{table_nm}';
+	'''
+	return execute_sql(sql)
+
+def getMatViewCols(view_nm):
+	sql = f'''
+	SELECT a.attname as col_nm
+	FROM pg_attribute a
+	JOIN pg_class c ON a.attrelid = c.oid
+	WHERE c.relname = '{view_nm}' 
+	AND a.attnum > 0 
+	AND NOT a.attisdropped;
+	'''
+	return execute_sql(sql)
