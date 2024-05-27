@@ -85,3 +85,23 @@ def getMatViewCols(view_nm):
 	AND NOT a.attisdropped;
 	'''
 	return execute_sql(sql)
+
+# object to string
+def objToStr(obj):
+	_str = ''
+	try:
+		_str = str(obj)
+	except:
+		_str = ''
+	finally:
+		return _str
+	
+# object to integer
+def objToInt(obj):
+	_int = 0
+	try:
+		_int = int(obj)
+	except:
+		_int = 0
+	finally:
+		return _int
