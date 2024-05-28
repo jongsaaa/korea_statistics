@@ -40,6 +40,23 @@ def process_sgg_codes(sgg_codes, case_no):
 
 	return sido_sgg_cd_map
 
+#sido_sgg_cd_map 만들기
+def getSggCd(sido_cd, sgg_nm, year, case_no):
+	year = int(year)
+	if year < 2005: code = _codes.sgg_codes_2000
+	elif year < 2010: code = _codes.sgg_codes_2005
+	elif year < 2015: code = _codes.sgg_codes_2010
+	elif year < 2020: code = _codes.sgg_codes_2015
+	elif year < 2023: code = _codes.sgg_codes_2020
+	elif year >= 2023: code = _codes.sgg_codes_2023
+	else: raise Exception
+
+	sido_sgg_cd_map = process_sgg_codes(code, case_no)
+	sido = sido_sgg_cd_map.get(sido_cd, {})
+	sgg_cd = dict(sido).get(sgg_nm, None)
+
+	return sgg_cd
+
 import psycopg2 #db connect
 
 #query execute
@@ -53,6 +70,7 @@ def execute_sql(sql):
 	if str(sql).count('create') > 0: pass
 	elif str(sql).count('drop') > 0: pass
 	elif str(sql).count('insert') > 0: pass
+	elif str(sql).count('update') > 0: pass
 	else: result = cursor.fetchall()
 	if result is not None: print(result)
 
