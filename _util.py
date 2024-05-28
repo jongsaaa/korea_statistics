@@ -64,21 +64,28 @@ def execute_sql(sql):
 	conn = psycopg2.connect('dbname=postgres user=postgres password=force1234 host=localhost port=5432')
 	cursor = conn.cursor()
 
-	print(sql)
-	cursor.execute(sql)
+	# print(sql)
+	try:
+		cursor.execute(sql)
+	except Exception as e:
+		print("error", sql)
+		print(e)
+		return
+
 	result = None
-	if str(sql).count('create') > 0: pass
-	elif str(sql).count('drop') > 0: pass
-	elif str(sql).count('insert') > 0: pass
-	elif str(sql).count('update') > 0: pass
-	else: result = cursor.fetchall()
-	if result is not None: print(result)
+	# if str(sql).count('create') > 0: pass
+	# elif str(sql).count('drop') > 0: pass
+	# elif str(sql).count('insert') > 0: pass
+	# elif str(sql).count('update') > 0: pass
+	# if result is not None: print(result)
+	try: result = cursor.fetchall()
+	except: pass
+	finally:
+		conn.commit()
+		cursor.close()
+		conn.close()
 
-	conn.commit()
-	cursor.close()
-	conn.close()
-
-	return result
+		return result
 
 #list type data 분할하기
 def chunker(seq, size):
