@@ -149,7 +149,16 @@ def objDivide(obj1, obj2):
 		_rst = float('inf')
 	finally:
 		return _rst
-
+	
+def objMultiple(obj1, obj2):
+	_rst = 0
+	try:
+		_rst = float(obj1) * float(obj2)
+	except:
+		_rst = float('inf')
+	finally:
+		return _rst
+	
 # 지도 레이어 년도 설정
 def makeGisYear (year):
 	if year < 2005: gis_year = 2000
